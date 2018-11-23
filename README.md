@@ -5,6 +5,7 @@
 - [ ] lerna
 - [ ] add app_common
 - [ ] add commit rules
+- [ ] add precommit verifications
 
 ## API
 - [x] api

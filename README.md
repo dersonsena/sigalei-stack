@@ -12,7 +12,6 @@
 - [x] new server structure to api
 - [x] graphql-playground
 - [x] sequelize
-- [x] graphql files as .graphql
 - [ ] api unit tests
 - [ ] security improvements
 - [ ] public and private schemas

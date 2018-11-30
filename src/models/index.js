@@ -13,6 +13,7 @@ const maxPools = 15;
 const config = require(`../../postgres-config.js`)[env];
 const db = {};
 let sequelize;
+config.logging = false;
 
 // set max pool and appName
 config.pool = { max: maxPools, min: 0, idle: 10000 };
@@ -42,7 +43,6 @@ Object.keys(db).forEach(modelName => {
 });
 
 const options = {};
-options.logging = false;
 options.force = true;
 
 sequelize.sync();

@@ -3,11 +3,11 @@ const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schema
 
 class SchemaBuilder {
   constructor() {
-    this.typePath = path.join(__dirname, './types');
+    this.typePath = path.join(__dirname, './**/types/*.graphql');
     // this.enumPath = path.join(__dirname, './enums');
-    this.resolverPath = path.join(__dirname, './resolvers');
-    this.queryPath = path.join(__dirname, './queries');
-    this.mutationPath = path.join(__dirname, './mutations');
+    this.resolverPath = path.join(__dirname, './**/*.js');
+    this.queryPath = path.join(__dirname, './**/query/*.graphql');
+    this.mutationPath = path.join(__dirname, './**/mutation/*.graphql');
     this.types = fileLoader(this.typePath);
     // this.enums = fileLoader(this.enumPath);
     this.queries = fileLoader(this.queryPath);

@@ -1,4 +1,4 @@
-"Queries"
+"User Queries"
 type Query {
   """
   Get a user
@@ -8,8 +8,4 @@ type Query {
   Get user credentials
   """
   login(email: String!, password: String!): AuthToken
-  """
-  Get a task
-  """
-  task(id: String!): Task
 }

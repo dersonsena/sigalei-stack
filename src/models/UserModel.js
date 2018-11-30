@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  User.hook('beforeCreate', async user => {
+  User.addHook('beforeCreate', async user => {
     const userWithPasswordEncrypted = user;
 
     try {

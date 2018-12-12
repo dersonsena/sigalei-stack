@@ -1,5 +1,9 @@
 ## sigalei frontend and backend stack of our application
 
+## Contents
+* [General](#general)
+* [Commit Rules](#commit-rules)
+
 ## General
 - [ ] CI with CircleCI
 - [ ] lerna
@@ -22,7 +26,7 @@
 - [ ] try hooks
 - [ ] main components
 
-## Commit rules from [@commitlint/config-angular](https://github.com/marionebl/commitlint/tree/master/@commitlint/config-conventional)
+## Commit rules
 #### type-enum
 * **condition**: `type` is found in value
 * **rule**: `always`
@@ -131,3 +135,5 @@ echo "fix: some message" # passes
 echo "fix: some message that is way too long and breaks the line max-length by several characters" # fails
 echo "fix: some message" # passes
 ```
+
+Taken from [@commitlint/config-angular](https://github.com/marionebl/commitlint/tree/master/@commitlint/config-conventional)

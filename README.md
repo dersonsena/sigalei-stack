@@ -4,7 +4,7 @@
 - [ ] CI with CircleCI
 - [ ] lerna
 - [ ] add app_common
-- [ ] add commit rules
+- [x] add commit rules
 - [ ] add precommit verifications
 
 ## API

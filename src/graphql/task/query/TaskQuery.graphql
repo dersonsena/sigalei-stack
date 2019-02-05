@@ -1,7 +1,0 @@
-"Task queries"
-type Query {
-  """
-  Get a task
-  """
-  task(id: String!): Task
-}

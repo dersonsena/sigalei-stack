@@ -1,11 +1,24 @@
 // App.js
 import React from "react";
-import { graphql, QueryRenderer } from "react-relay";
+import graphql from 'babel-plugin-relay/macro';
+import createQueryRenderer from './CreateQueryRender'
 
-import environment from "./relay/CreateRelayEnviroment";
-
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
+    console.log(this.props);
     return <div>olaaa</div>;
   }
 }
+
+
+export default  createQueryRenderer(App, {
+  query: graphql`
+    query AppQuery {
+      user(id: "f229173d-1a54-43c3-9a81-5d02b6fb1093") {
+        id
+        email
+      }
+    }
+  `
+});
+

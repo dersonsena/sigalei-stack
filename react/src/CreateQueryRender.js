@@ -1,7 +1,7 @@
 import React from 'react'
 import { QueryRenderer } from "react-relay";
 
-import environment from "./relay/CreateRelayEnviroment";
+import environment from "./CreateRelayEnviroment";
 
 export default function createQueryRenderer(FragmentComponent, config) {
   const { query, variables } = config;
@@ -16,7 +16,7 @@ export default function createQueryRenderer(FragmentComponent, config) {
             return <div>Error!</div>;
           }
           if (props) {
-            return <FragmentComponent {...wrapperProps} query={props} />;
+            return <FragmentComponent {...wrapperProps} data={props} />;
           }
           return <div>Loading!</div>;
         }}

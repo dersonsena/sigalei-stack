@@ -6,7 +6,8 @@ module.exports = {
   },
   Query: {
     user: async (obj, { id }, { auth }, info) => {
-      User.hasPermission(auth, User.findById(id));
+      // User.hasPermission(auth, User.findByPk(id));
+      return User.findByPk(id);
     },
     login: async (obj, args) => User.login(args),
   },

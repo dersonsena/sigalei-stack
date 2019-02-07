@@ -1,8 +1,7 @@
 // App.js
 import React from "react";
-import graphql from "babel-plugin-relay/macro";
-import createQueryRenderer from "./CreateQueryRender";
 import Login from "./Login";
+import UserList from "./UserList";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,17 +12,17 @@ class App extends React.Component {
   }
 
   onLogin = token => {
-    this.setState({token});
-  }
+    this.setState({ token });
+  };
 
   render() {
     const { token } = this.state;
     if (!token) {
-      return <Login onLogin={this.onLogin}/>;
+      return <Login onLogin={this.onLogin} />;
     } else {
-      return <div>Banana</div>;
+      return <UserList />;
     }
   }
 }
 
-export default App
+export default App;

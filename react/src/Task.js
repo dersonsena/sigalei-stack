@@ -7,7 +7,7 @@ import { createFragmentContainer } from "react-relay";
 class Task extends React.Component {
   render() {
     const {
-      task: { content, completed }
+      task: { content }
     } = this.props;
 
     return <li>{content}</li>;

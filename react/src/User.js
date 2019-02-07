@@ -35,7 +35,9 @@ class User extends React.Component {
   insertTask = () => {
     const { content } = this.state;
     const {
-      user: { id: userId }
+      user: { id: userId },
+      refetch,
+      withRefetch
     } = this.props;
 
     commitMutation({
@@ -43,8 +45,26 @@ class User extends React.Component {
       variables: { userId, content },
       onCompleted: () => {
         this.setState({ content: "" });
+        if (withRefetch) {
+          refetch({}, null, () => {});
+        }
       },
-      OnError: () => {}
+      OnError: () => {},
+      updater: (store, data) => {
+        if (!withRefetch) {
+          const { createTask } = data;
+
+          const user = store.get(userId);
+
+          const tasks = user.getLinkedRecords("Tasks");
+
+          const task = store.get(createTask.id);
+
+          const newTasks = [...tasks, task];
+
+          user.setLinkedRecords(newTasks, "Tasks");
+        }
+      }
     });
   };
 

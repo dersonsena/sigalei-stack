@@ -24,7 +24,6 @@ fetch(`http://localhost:9000/graphql`, {
   .then(async schemaJSON => {
     const schemaGraphQL = printSchema(buildClientSchema(schemaJSON.data));
     fs.writeFileSync(graphQLFile, schemaGraphQL);
-    // fs.writeFileSync(jsonFile, JSON.stringify(schemaJSON, null, 2));
   })
   .catch(error => {
     if (error.code === "ECONNREFUSED") {

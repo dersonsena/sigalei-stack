@@ -44,29 +44,7 @@ class User extends React.Component {
       onCompleted: () => {
         this.setState({ content: "" });
       },
-      OnError: () => {},
-      // updater: (store, data) => {
-      //   console.log("data: ", data);
-      //   const {
-      //     createTask
-      //   } = data;
-      //   const user = store.get(userId);
-      //   console.log("user", user);
-      //   const tasks = user.getLinkedRecords("Tasks");
-      //   console.log("tasks", tasks);
-      //   // const task = store.create(id, "Task");
-      //   // console.log("task", task);
-
-      //   // task.setLinkedRecord(data.id, "id");
-      //   // task.setLinkedRecord(data.content, "content");
-      //   // task.setLinkedRecord(data.completed, "completed");
-
-      //   const newTasks = [...tasks, createTask];
-        
-        
-        
-      //   user.setLinkedRecords(newTasks, "Tasks");
-      // }
+      OnError: () => {}
     });
   };
 

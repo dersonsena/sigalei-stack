@@ -26,7 +26,7 @@ class UserList extends React.Component {
     return (
       <div style={{ width: "33%" }}>
         <h2>Lista de Usuários</h2>
-        <label class="switch">
+        <label>
           <input
             checked={checked}
             onChange={this.toggleChecked}

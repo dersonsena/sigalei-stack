@@ -26,8 +26,6 @@ class Login extends React.Component {
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    console.log(email);
-    console.log(password);
     fetchQuery(query, { email, password }).then(response => {
       if (response.login) {
         this.setState({
@@ -43,7 +41,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { token, error } = this.state;
+    const { error } = this.state;
     return (
       <div className="container">
         <div>

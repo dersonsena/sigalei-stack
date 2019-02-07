@@ -16,7 +16,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions=js --extensions=jsx",
-    "get-schema": "node ./src/utils/getSchema.js && "
+    "get-schema": "node ./src/utils/getSchema.js "
   },
   "eslintConfig": {
     "extends": "react-app"

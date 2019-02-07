@@ -3,12 +3,16 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+      primaryKey: true
     },
     content: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
+    completed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   });
   Task.associate = ({ User }) => {
     Task.belongsTo(User, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });

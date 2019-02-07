@@ -5,7 +5,7 @@ type User {
   """
   User id
   """
-  id: String
+  id: ID!
   """
   User email
   """
@@ -14,4 +14,8 @@ type User {
   User password
   """
   password: String
+  """
+  the user tasks
+  """
+  Tasks: [Task]
 }

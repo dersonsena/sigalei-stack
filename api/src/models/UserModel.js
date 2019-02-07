@@ -3,7 +3,7 @@ const bcrypt = module.require('bcrypt');
 
 const errors = {
   INVALID_EMAIL_OR_PASSWORD: 'Invalid email or password',
-  EMAIL_UNAVAILABLE: 'Email unavaiable',
+  EMAIL_UNAVAILABLE: 'Email unavaiable'
 };
 
 const getError = error => new Error(errors[error]);
@@ -13,17 +13,17 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+      primaryKey: true
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   });
 
   User.addHook('beforeCreate', async user => {
@@ -36,6 +36,10 @@ module.exports = (sequelize, DataTypes) => {
       throw err;
     }
   });
+
+  User.associate = ({ Task }) => {
+    User.hasMany(Task, { onDelete: 'cascade' });
+  };
 
   User.signUp = async ({ email, password }) => {
     try {
@@ -63,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
       const jwtUser = { userId: user.id };
 
       const token = jwt.sign(jwtUser, process.env.API_SECRET, {
-        expiresIn: '4h',
+        expiresIn: '4h'
       });
 
       return { token, user };

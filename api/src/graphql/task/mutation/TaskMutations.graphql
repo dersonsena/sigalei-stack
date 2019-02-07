@@ -7,5 +7,5 @@ type Mutation {
   """
   Create a task
   """
-  createTask(content: String!): Task
+  createTask(content: String!, userId: String!): Task
 }

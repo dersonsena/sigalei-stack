@@ -5,9 +5,13 @@ type Task {
   """
   Task id
   """
-  id: String
+  id: ID!
   """
   Task content
   """
   content: String
+  """
+  The completed status of a task
+  """
+  completed: Boolean
 }

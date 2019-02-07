@@ -5,6 +5,10 @@ type Query {
   """
   user(id: String!): User
   """
+  Get a user
+  """
+  users: [User]
+  """
   Get user credentials
   """
   login(email: String!, password: String!): AuthToken

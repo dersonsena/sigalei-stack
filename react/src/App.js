@@ -1,24 +1,29 @@
 // App.js
 import React from "react";
-import graphql from 'babel-plugin-relay/macro';
-import createQueryRenderer from './CreateQueryRender'
+import graphql from "babel-plugin-relay/macro";
+import createQueryRenderer from "./CreateQueryRender";
+import Login from "./Login";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: null
+    };
+  }
+
+  onLogin = token => {
+    this.setState({token});
+  }
+
   render() {
-    console.log(this.props);
-    return <div>olaaa</div>;
+    const { token } = this.state;
+    if (!token) {
+      return <Login onLogin={this.onLogin}/>;
+    } else {
+      return <div>Banana</div>;
+    }
   }
 }
 
-
-export default  createQueryRenderer(App, {
-  query: graphql`
-    query AppQuery {
-      user(id: "f229173d-1a54-43c3-9a81-5d02b6fb1093") {
-        id
-        email
-      }
-    }
-  `
-});
-
+export default App

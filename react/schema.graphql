@@ -1,0 +1,59 @@
+"""AuthToken: represents a users authentication token"""
+type AuthToken {
+  """Token"""
+  token: String!
+
+  """User"""
+  user: User!
+}
+
+"""Task mutations"""
+type Mutation {
+  """Sign up a new user"""
+  signUp(email: String!, password: String!): User
+
+  """Create a task"""
+  createTask(content: String!, userId: String!): Task
+}
+
+"""Task queries"""
+type Query {
+  """Get a task"""
+  task(id: String!): Task
+
+  """Get a user"""
+  user(id: String!): User
+
+  """Get a user"""
+  users: [User]
+
+  """Get user credentials"""
+  login(email: String!, password: String!): AuthToken
+}
+
+"""Task: represents a task"""
+type Task {
+  """Task id"""
+  id: ID!
+
+  """Task content"""
+  content: String
+
+  """The completed status of a task"""
+  completed: Boolean
+}
+
+"""User: represents a user"""
+type User {
+  """User id"""
+  id: ID!
+
+  """User email"""
+  email: String
+
+  """User password"""
+  password: String
+
+  """the user tasks"""
+  Tasks: [Task]
+}

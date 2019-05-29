@@ -47,7 +47,7 @@ const auth = async (resolve, parent, args, ctx, info) => {
 
   if (!token) {
     context.auth = { type: authTypes.PUBLIC };
-    return resolve();
+    throw new Error(messages.UNAUTHORIZED);
   }
 
   return authenticate(resolve, token, context);

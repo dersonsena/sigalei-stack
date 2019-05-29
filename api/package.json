@@ -54,6 +54,7 @@
     "merge-graphql-schemas": "^1.5.8",
     "pg": "^7.6.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^5.3.0"
+    "sequelize": "4.44.0",
+    "sequelize-cli": "4.0.0"
   }
 }

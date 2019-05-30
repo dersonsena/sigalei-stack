@@ -6,9 +6,9 @@ module.exports = {
   },
   Query: {
     user: (obj, { id }, { auth }, info) =>
-      // User.hasPermission(auth, User.findByPk(id));
-      User.findByPk(id),
-    users: () => User.findAll({ include: [Task] }),
+      User.hasPermission(auth, User.findByPk(id)),
+    users: (obj, args, { auth }) =>
+      User.hasPermission(auth, User.findAll({ include: [Task] })),
     login: (obj, args) => User.login(args)
   }
 };

@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   Task.associate = ({ User }) => {
-    Task.belongsTo(User, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+    Task.belongsTo(User, {
+      foreignKey: { allowNull: false },
+      onDelete: 'CASCADE'
+    });
   };
 
   return Task;

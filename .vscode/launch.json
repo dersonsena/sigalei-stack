@@ -7,8 +7,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/api/src/index.js"
+      "name": "Launch API",
+      "program": "${workspaceFolder}/api/src/index.js",
+      "cwd": "${workspaceFolder}/api"
     }
   ]
 }

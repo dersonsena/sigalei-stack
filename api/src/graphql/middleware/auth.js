@@ -4,12 +4,12 @@ const { User } = module.require('../../models');
 const messages = {
   UNAUTHORIZED: 'Unauthorized',
   INVALID_CREDS: 'Invalid credentials',
-  DB_ERROR: 'Internal Database error',
+  DB_ERROR: 'Internal Database error'
 };
 
 const authTypes = {
   PUBLIC: 'public',
-  PRIVATE: 'private',
+  PRIVATE: 'private'
 };
 
 const authenticate = async (resolve, token, ctx) => {
@@ -23,7 +23,7 @@ const authenticate = async (resolve, token, ctx) => {
   }
 
   const params = {
-    where: { id: jwtDecoded.userId },
+    where: { id: jwtDecoded.userId }
   };
 
   try {

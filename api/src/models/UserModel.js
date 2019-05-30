@@ -1,9 +1,12 @@
+/* eslint max-lines-per-function: 0 */
+
 const jwt = module.require('jsonwebtoken');
 const bcrypt = module.require('bcrypt');
 
 const errors = {
   INVALID_EMAIL_OR_PASSWORD: 'Invalid email or password',
-  EMAIL_UNAVAILABLE: 'Email unavaiable'
+  EMAIL_UNAVAILABLE: 'Email unavaiable',
+  UNAUTHORIZED: 'Unauthorized'
 };
 
 const getError = error => new Error(errors[error]);
@@ -83,19 +86,11 @@ module.exports = (sequelize, DataTypes) => {
     return false;
   };
 
-  User.filterDataByUser = (data, user) => {
-    if (data.UserId === user.id) {
-      return data;
-    }
-    return null;
-  };
-
-  User.hasPermission = async ({ type, user }, promise) => {
+  User.hasPermission = async ({ type }, promise) => {
     if (User.isLoggedIn(type)) {
-      const data = await promise;
-      return User.filterDataByUser(data, user);
+      return promise;
     }
-    return false;
+    return new Error(errors.UNAUTHORIZED);
   };
 
   return User;

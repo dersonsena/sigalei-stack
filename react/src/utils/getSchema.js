@@ -12,7 +12,7 @@ const {
 
 const graphQLFile = path.join(__dirname, "../../schema.graphql");
 
-fetch(`http://localhost:9000/graphql`, {
+fetch(`http://localhost:5000/graphql`, {
   method: "POST",
   headers: {
     Accept: "application/json",
@@ -28,7 +28,7 @@ fetch(`http://localhost:9000/graphql`, {
   .catch(error => {
     if (error.code === "ECONNREFUSED") {
       console.log(
-        chalk.red(`Connection error, no api runnin on http://localhost:9000`)
+        chalk.red(`Connection error, no api runnin on http://localhost:5000`)
       );
     }
   });

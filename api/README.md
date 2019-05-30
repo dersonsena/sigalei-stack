@@ -2,7 +2,7 @@
 
 ## Setup
 - Install packages with yarn
-- Create a .env file with your postgres connection variables:
+- Create a .env file, inside api folder, with your postgres connection variables:
   ```
   PG_DATABASE=databasename
   PG_HOST=host
@@ -14,7 +14,7 @@
   ```
   ./node_modules/.bin/sequelize db:create
   ```
-- Acess localhost:3000/test
+- Acess localhost:5000/test
 - Go to schema (upper right) to see our avaiable methods
 ## Contents
 * [General](#general)

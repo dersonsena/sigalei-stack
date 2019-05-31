@@ -9,11 +9,11 @@
 - Install packages with yarn
 - Create a .env file, inside api folder, with your postgres connection variables:
   ```
-  PG_DATABASE=databasename
-  PG_HOST=host
-  PG_USERNAME=username
-  PG_PASSWORD=password
-  PG_PORT=port
+  PG_DATABASE=challenge_database
+  PG_HOST=localhost
+  PG_USERNAME=postgres
+  PG_PASSWORD=
+  PG_PORT=5432
   ```
 - Create database (run inside /api folder)
   ```

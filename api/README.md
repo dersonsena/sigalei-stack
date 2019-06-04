@@ -14,6 +14,7 @@
   PG_USERNAME=postgres
   PG_PASSWORD=
   PG_PORT=5432
+  API_SECRET=your-secret-key
   ```
 - Create database (run inside /api folder)
   ```

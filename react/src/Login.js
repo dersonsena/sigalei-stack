@@ -23,6 +23,21 @@ class Login extends React.Component {
       password: '',
       error: false
     };
+
+    this.fields = [
+      {
+        name: 'email',
+        type: 'email',
+        label: 'E-mail:',
+        onChange: this.handleChange
+      },
+      {
+        name: 'password',
+        type: 'password',
+        label: 'Password:',
+        onChange: this.handleChange
+      }
+    ];
   }
 
   handleChange = e => {
@@ -58,8 +73,11 @@ class Login extends React.Component {
             <h1>Enter the plataform</h1>
           </div>
 
-          <FormField name="email" type="email" label="E-mail:" value={this.state.email} onChange={this.handleChange} />
-          <FormField name="password" type="password" label="Password:" value={this.state.email} onChange={this.handleChange} />
+          {
+            this.fields.map((field, key) => {
+              return <FormField key={key} value={this.state[field.name]} { ...field } />
+            })
+          }
           
           <button type="button" onClick={this.handleClick}>
             Login

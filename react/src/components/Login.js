@@ -1,9 +1,9 @@
 /* global document */
 import React from "react";
-import fetchQuery from "./fetchQuery";
+import fetchQuery from "../utils/fetchQuery";
 import graphql from "babel-plugin-relay/macro";
 
-import "./index.css";
+import "../assets/index.css";
 
 const query = graphql`
   query LoginQuery($email: String!, $password: String!) {

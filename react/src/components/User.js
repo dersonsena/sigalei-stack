@@ -3,7 +3,7 @@ import React from "react";
 import graphql from "babel-plugin-relay/macro";
 
 import { createFragmentContainer } from "react-relay";
-import commitMutation from "./commitMutation";
+import commitMutation from "../utils/commitMutation";
 import Task from "./Task";
 
 const taskMutation = graphql`

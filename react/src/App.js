@@ -1,7 +1,7 @@
 // App.js
 import React from "react";
-import Login from "./Login";
-import UserList from "./UserList";
+import Login from "./components/Login";
+import UserList from "./components/UserList";
 
 class App extends React.Component {
   constructor(props) {

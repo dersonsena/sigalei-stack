@@ -16,32 +16,40 @@ const query = graphql`
 class Login extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      email: '',
+      password: '',
       error: false
     };
   }
 
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    })
+  };
+
   handleClick = () => {
     const { onLogin } = this.props;
+    const email = this.state.email;
+    const password = this.state.password;
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
     fetchQuery(query, { email, password }).then(response => {
-      if (response.login) {
-        this.setState({
-          error: false
-        });
-        onLogin(response.login.token);
-      } else {
-        this.setState({
-          error: true
-        });
+      if (!response.login) {
+        this.setState({ error: true });
+        return;
       }
+
+      this.setState({ error: false });
+      onLogin(response.login.token);
     });
   };
 
   render() {
     const { error } = this.state;
+
     return (
       <div className="container">
         <div>
@@ -50,17 +58,17 @@ class Login extends React.Component {
           </div>
           <div className="block">
             <label htmlFor="email">Email: </label>
-            <input type="text" id="email" />
+            <input value={this.state.email} onChange={this.handleChange} name="email" type="email" />
           </div>
           <div className="block">
             <label htmlFor="password">Passsword: </label>
-            <input type="password" id="password" />
+            <input value={this.state.password} onChange={this.handleChange} name="password" type="password" />
           </div>
           <button type="button" onClick={this.handleClick}>
             Login
           </button>
           <div className="block">
-            {error ? <span className="error">Login error</span> : null}
+            { error ? <span className="error">Login error</span> : null }
           </div>
         </div>
       </div>

@@ -58,21 +58,8 @@ class Login extends React.Component {
             <h1>Enter the plataform</h1>
           </div>
 
-          <FormField
-            name="email"
-            type="email"
-            label="E-mail:"
-            placeholder="user@email.com"
-            value={this.state.email}
-            onChange={this.handleChange} />
-
-          <FormField
-            name="password"
-            type="password"
-            label="Password:"
-            placeholder="Type your password..."
-            value={this.state.email}
-            onChange={this.handleChange} />
+          <FormField name="email" type="email" label="E-mail:" value={this.state.email} onChange={this.handleChange} />
+          <FormField name="password" type="password" label="Password:" value={this.state.email} onChange={this.handleChange} />
           
           <button type="button" onClick={this.handleClick}>
             Login

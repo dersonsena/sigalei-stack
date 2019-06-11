@@ -4,6 +4,7 @@ import fetchQuery from "./fetchQuery";
 import graphql from "babel-plugin-relay/macro";
 
 import "./index.css";
+import FormField from "./FormField";
 
 const query = graphql`
   query LoginQuery($email: String!, $password: String!) {
@@ -56,14 +57,23 @@ class Login extends React.Component {
           <div className="block">
             <h1>Enter the plataform</h1>
           </div>
-          <div className="block">
-            <label htmlFor="email">Email: </label>
-            <input value={this.state.email} onChange={this.handleChange} name="email" type="email" />
-          </div>
-          <div className="block">
-            <label htmlFor="password">Passsword: </label>
-            <input value={this.state.password} onChange={this.handleChange} name="password" type="password" />
-          </div>
+
+          <FormField
+            name="email"
+            type="email"
+            label="E-mail:"
+            placeholder="user@email.com"
+            value={this.state.email}
+            onChange={this.handleChange} />
+
+          <FormField
+            name="password"
+            type="password"
+            label="Password:"
+            placeholder="Type your password..."
+            value={this.state.email}
+            onChange={this.handleChange} />
+          
           <button type="button" onClick={this.handleClick}>
             Login
           </button>

@@ -1,10 +1,11 @@
 /* global document */
-import React from "react";
+import React, { useState } from "react";
 import fetchQuery from "./fetchQuery";
 import graphql from "babel-plugin-relay/macro";
 import PropTypes from 'prop-types';
 
 import "./index.css";
+import FormField from "./FormField";
 
 const query = graphql`
   query LoginQuery($email: String!, $password: String!) {
@@ -14,60 +15,67 @@ const query = graphql`
   }
 `;
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: false
-    };
-  }
+const Login = ({ onLogin }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
-  handleClick = () => {
-    const { onLogin } = this.props;
+  const fields = [
+    {
+      name: 'email',
+      type: 'email',
+      label: 'E-mail:',
+      value: email,
+      onChange: e => setEmail(e.target.value)
+    },
+    {
+      name: 'password',
+      type: 'password',
+      label: 'Password:',
+      value: password,
+      onChange: e => setPassword(e.target.value)
+    }
+  ];
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  const handleSubmit = e => {
     fetchQuery(query, { email, password }).then(response => {
-      if (response.login) {
-        this.setState({
-          error: false
-        });
-        onLogin(response.login.token);
-      } else {
-        this.setState({
-          error: true
-        });
+      if (!response.login) {
+        setError(true);
+        return;
       }
+
+      setError(false);
+      onLogin(response.login.token);
     });
+
+    e.preventDefault();
   };
 
-  render() {
-    const { error } = this.state;
-    return (
-      <div className="container">
-        <div>
-          <div className="block">
-            <h1>Enter the plataform</h1>
-          </div>
-          <div className="block">
-            <label htmlFor="email">Email: </label>
-            <input type="text" id="email" />
-          </div>
-          <div className="block">
-            <label htmlFor="password">Passsword: </label>
-            <input type="password" id="password" />
-          </div>
-          <button type="button" onClick={this.handleClick}>
+  return (
+    <div className="container">
+      <div>
+        <div className="block">
+          <h1>Enter the plataform</h1>
+        </div>
+        <form onSubmit={handleSubmit}>
+          {
+            fields.map((field, key) => {
+              return <FormField key={key} { ...field } />
+            })
+          }
+          
+          <button type="submit">
             Login
           </button>
+
           <div className="block">
-            {error ? <span className="error">Login error</span> : null}
+            { error ? <span className="error">Login error</span> : null }
           </div>
-        </div>
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Login.propTypes = {
   onLogin: PropTypes.func.isRequired

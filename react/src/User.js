@@ -96,6 +96,12 @@ User.propTypes = {
   withRefetch: PropTypes.bool
 };
 
+User.defaultProps = {
+  user: {},
+  refetch: null,
+  withRefetch: false
+};
+
 export default createFragmentContainer(User, {
   user: graphql`
     fragment User_user on User {

@@ -36,7 +36,7 @@ const Login = ({ onLogin }) => {
     }
   ];
 
-  const handleClick = () => {
+  const handleSubmit = e => {
     fetchQuery(query, { email, password }).then(response => {
       if (!response.login) {
         setError(true);
@@ -46,6 +46,8 @@ const Login = ({ onLogin }) => {
       setError(false);
       onLogin(response.login.token);
     });
+
+    e.preventDefault();
   };
 
   return (
@@ -54,19 +56,21 @@ const Login = ({ onLogin }) => {
         <div className="block">
           <h1>Enter the plataform</h1>
         </div>
+        <form onSubmit={handleSubmit}>
+          {
+            fields.map((field, key) => {
+              return <FormField key={key} { ...field } />
+            })
+          }
+          
+          <button type="submit">
+            Login
+          </button>
 
-        {
-          fields.map((field, key) => {
-            return <FormField key={key} { ...field } />
-          })
-        }
-        
-        <button type="button" onClick={handleClick}>
-          Login
-        </button>
-        <div className="block">
-          { error ? <span className="error">Login error</span> : null }
-        </div>
+          <div className="block">
+            { error ? <span className="error">Login error</span> : null }
+          </div>
+        </form>
       </div>
     </div>
   );

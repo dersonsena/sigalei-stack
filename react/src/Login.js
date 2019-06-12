@@ -1,5 +1,5 @@
 /* global document */
-import React from "react";
+import React, { useState } from "react";
 import fetchQuery from "./fetchQuery";
 import graphql from "babel-plugin-relay/macro";
 
@@ -14,81 +14,62 @@ const query = graphql`
   }
 `;
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
+const Login = ({ onLogin }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
-    this.state = {
-      email: '',
-      password: '',
-      error: false
-    };
+  const fields = [
+    {
+      name: 'email',
+      type: 'email',
+      label: 'E-mail:',
+      value: email,
+      onChange: e => setEmail(e.target.value)
+    },
+    {
+      name: 'password',
+      type: 'password',
+      label: 'Password:',
+      value: password,
+      onChange: e => setPassword(e.target.value)
+    }
+  ];
 
-    this.fields = [
-      {
-        name: 'email',
-        type: 'email',
-        label: 'E-mail:',
-        onChange: this.handleChange
-      },
-      {
-        name: 'password',
-        type: 'password',
-        label: 'Password:',
-        onChange: this.handleChange
-      }
-    ];
-  }
-
-  handleChange = e => {
-    this.setState({
-      ...this.state,
-      [e.target.name]: e.target.value
-    })
-  };
-
-  handleClick = () => {
-    const { onLogin } = this.props;
-    const email = this.state.email;
-    const password = this.state.password;
-
+  const handleClick = () => {
     fetchQuery(query, { email, password }).then(response => {
       if (!response.login) {
-        this.setState({ error: true });
+        setError(true);
         return;
       }
 
-      this.setState({ error: false });
+      setError(false);
       onLogin(response.login.token);
     });
   };
 
-  render() {
-    const { error } = this.state;
+  return (
+    <div className="container">
+      <div>
+        <div className="block">
+          <h1>Enter the plataform</h1>
+        </div>
 
-    return (
-      <div className="container">
-        <div>
-          <div className="block">
-            <h1>Enter the plataform</h1>
-          </div>
-
-          {
-            this.fields.map((field, key) => {
-              return <FormField key={key} value={this.state[field.name]} { ...field } />
-            })
-          }
-          
-          <button type="button" onClick={this.handleClick}>
-            Login
-          </button>
-          <div className="block">
-            { error ? <span className="error">Login error</span> : null }
-          </div>
+        {
+          fields.map((field, key) => {
+            return <FormField key={key} { ...field } />
+          })
+        }
+        
+        <button type="button" onClick={handleClick}>
+          Login
+        </button>
+        <div className="block">
+          { error ? <span className="error">Login error</span> : null }
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Login;

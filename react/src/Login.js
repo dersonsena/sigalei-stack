@@ -2,6 +2,7 @@
 import React from "react";
 import fetchQuery from "./fetchQuery";
 import graphql from "babel-plugin-relay/macro";
+import PropTypes from 'prop-types';
 
 import "./index.css";
 
@@ -67,5 +68,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired
+};
 
 export default Login;

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import fetchQuery from "./fetchQuery";
 import graphql from "babel-plugin-relay/macro";
+import PropTypes from 'prop-types';
 
 import "./index.css";
 import FormField from "./FormField";
@@ -74,6 +75,10 @@ const Login = ({ onLogin }) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired
 };
 
 export default Login;

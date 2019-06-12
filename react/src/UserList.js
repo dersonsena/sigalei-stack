@@ -54,6 +54,11 @@ UserList.propTypes = {
   relay: PropTypes.object
 };
 
+UserList.defaultProps = {
+  data: {},
+  relay: {}
+};
+
 const query = graphql`
   query UserListQuery {
     ...UserList

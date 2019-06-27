@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = ({ Task }) => {
-    User.hasMany(Task, { onDelete: 'cascade' });
+    User.Tasks = User.hasMany(Task, { as: 'tasks' });
   };
 
   User.signUp = async ({ email, password }) => {

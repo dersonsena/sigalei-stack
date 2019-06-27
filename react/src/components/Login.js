@@ -1,11 +1,11 @@
 /* global document */
 import React, { useState } from "react";
-import fetchQuery from "./fetchQuery";
+import fetchQuery from "../utils/fetchQuery";
 import graphql from "babel-plugin-relay/macro";
 import PropTypes from 'prop-types';
 
-import "./index.css";
-import FormField from "./FormField";
+import "../assets/index.css";
+import FormField from "../FormField";
 
 const query = graphql`
   query LoginQuery($email: String!, $password: String!) {

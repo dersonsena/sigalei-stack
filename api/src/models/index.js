@@ -1,9 +1,11 @@
-require('dotenv').config();
+const dotenv = module.require('dotenv');
 const fs = require('fs');
-
 const path = require('path');
-
 const Sequelize = require('sequelize');
+
+dotenv.config({
+  path: path.resolve(__dirname, '../../.env')
+});
 
 const basename = path.basename(module.filename);
 
@@ -13,7 +15,7 @@ const maxPools = 15;
 const config = require(`../../postgres-config.js`)[env];
 const db = {};
 let sequelize;
-config.logging = false;
+config.logging = process.env.PG_LOGGING === 'true' || false;
 
 // set max pool and appName
 config.pool = { max: maxPools, min: 0, idle: 10000 };

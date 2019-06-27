@@ -1,8 +1,13 @@
-require('dotenv').config();
+const dotenv = module.require('dotenv');
+const path = module.require('path');
 const { GraphQLServer } = require('graphql-yoga');
 const middleware = require('./graphql/middleware/auth');
 
 const schemaBuilder = module.require('./graphql/schemaBuilder');
+
+dotenv.config({
+  path: path.resolve(__dirname, '../.env')
+});
 
 const schema = schemaBuilder.buildAll();
 schema.context = req => ({ ...req });

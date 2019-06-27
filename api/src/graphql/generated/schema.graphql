@@ -1,0 +1,106 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Task queries"
+type Query {
+  # Get a task
+  """
+  Get a task
+  """
+  task(id: String!): Task
+  # Get a user
+  """
+  Get a user
+  """
+  user(id: String!): User
+  # Get a user
+  """
+  Get a user
+  """
+  users: [User]
+  # Get user credentials
+  """
+  Get user credentials
+  """
+  login(email: String!, password: String!): AuthToken
+}
+
+"Task mutations"
+type Mutation {
+  # Sign up a new user
+  """
+  Sign up a new user
+  """
+  signUp(email: String!, password: String!): User
+  # Create a task
+  """
+  Create a task
+  """
+  createTask(content: String!, userId: String!): Task
+  # Sign up a new user
+}
+
+"""
+Task: represents a task
+"""
+type Task {
+  # Task id
+  """
+  Task id
+  """
+  id: ID!
+  # Task content
+  """
+  Task content
+  """
+  content: String
+  # The completed status of a task
+  """
+  The completed status of a task
+  """
+  completed: Boolean
+}
+
+"""
+AuthToken: represents a users authentication token
+"""
+type AuthToken {
+  # Token
+  """
+  Token
+  """
+  token: String!
+  # User
+  """
+  User
+  """
+  user: User!
+}
+
+"""
+User: represents a user
+"""
+type User {
+  # User id
+  """
+  User id
+  """
+  id: ID!
+  # User email
+  """
+  User email
+  """
+  email: String
+  # User password
+  """
+  User password
+  """
+  password: String
+  # the user tasks
+  """
+  the user tasks
+  """
+  Tasks: [Task]
+}

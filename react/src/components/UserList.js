@@ -5,7 +5,7 @@ import graphql from "babel-plugin-relay/macro";
 
 import { createRefetchContainer } from "react-relay";
 
-import createQueryRenderer from "./CreateQueryRender";
+import createQueryRenderer from "../utils/CreateQueryRender";
 import User from "./User";
 
 class UserList extends React.Component {

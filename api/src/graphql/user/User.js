@@ -6,11 +6,11 @@ module.exports = {
     signUp: (obj, args) => User.signUp(args)
   },
   Query: {
-    user: resolver(User),
-    users: resolver(User),
+    user: (...args) => resolver(User)(...args),
+    users: (...args) => resolver(User)(...args),
     login: (obj, args) => User.login(args)
   },
   User: {
-    tasks: resolver(User.Tasks)
+    tasks: (...args) => resolver(User.Tasks)(...args)
   }
 };

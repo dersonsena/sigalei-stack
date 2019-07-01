@@ -4,4 +4,8 @@ type Query {
   Get a task
   """
   task(id: String!): Task
+  """
+  Get all tasks
+  """
+  tasks: [Task]
 }

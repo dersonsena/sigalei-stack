@@ -14,4 +14,8 @@ type Task {
   The completed status of a task
   """
   completed: Boolean
+  """
+  The use of the task
+  """
+  user: User
 }

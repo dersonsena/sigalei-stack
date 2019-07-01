@@ -66,5 +66,7 @@ tmp/
 #vscode configs
 .vscode/
 
+dist/
+
 # misc
 .DS_Store

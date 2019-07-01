@@ -1,4 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
+/* eslint max-lines-per-function: 0 */
+export default (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     id: {
       type: DataTypes.UUID,
@@ -15,8 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   Task.associate = ({ User }) => {
-    Task.belongsTo(User, {
-      foreignKey: { allowNull: false },
+    Task.User = Task.belongsTo(User, {
+      as: 'user',
+      foreignKey: 'UserId',
       onDelete: 'CASCADE'
     });
   };

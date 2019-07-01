@@ -17,5 +17,5 @@ type User {
   """
   the user tasks
   """
-  Tasks: [Task]
+  tasks: [Task]
 }

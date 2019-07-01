@@ -1,14 +1,16 @@
-const { User, Task } = module.require('../../../models');
+const { resolver } = module.require('graphql-sequelize');
+const { User } = module.require('../../../models');
 
 module.exports = {
   Mutation: {
     signUp: (obj, args) => User.signUp(args)
   },
   Query: {
-    user: (obj, { id }, { auth }, info) =>
-      User.hasPermission(auth, User.findByPk(id)),
-    users: (obj, args, { auth }) =>
-      User.hasPermission(auth, User.findAll({ include: [Task] })),
+    user: resolver(User),
+    users: resolver(User),
     login: (obj, args) => User.login(args)
+  },
+  User: {
+    tasks: resolver(User.Tasks)
   }
 };

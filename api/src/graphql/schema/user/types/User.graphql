@@ -1,7 +1,7 @@
 """
 User: represents a user
 """
-type User {
+type User implements Node {
   """
   User id
   """
@@ -24,3 +24,4 @@ type User {
     before: String
   ): UserTasksConnection
 }
+

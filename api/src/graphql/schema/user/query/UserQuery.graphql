@@ -7,7 +7,12 @@ type Query {
   """
   Get a user
   """
-  users: [User]
+  users(
+    first: Int=10,
+    after: String,
+    last: Int,
+    before: String
+  ): UserConnection
   """
   Get user credentials
   """

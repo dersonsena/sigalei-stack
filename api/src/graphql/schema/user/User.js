@@ -9,7 +9,7 @@ module.exports = {
   },
   Query: {
     user: resolver(User),
-    users: resolver(User),
+    users: createConnectionResolver({ target: User }).resolveConnection,
     login: (obj, args) => User.login(args)
   },
   User: {

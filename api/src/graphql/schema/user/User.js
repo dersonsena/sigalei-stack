@@ -1,4 +1,6 @@
-const { resolver } = module.require('graphql-sequelize');
+const { resolver, createConnectionResolver } = module.require(
+  'graphql-sequelize'
+);
 const { User } = module.require('../../../models');
 
 module.exports = {
@@ -7,10 +9,12 @@ module.exports = {
   },
   Query: {
     user: resolver(User),
-    users: resolver(User),
+    users: createConnectionResolver({ target: User }).resolveConnection,
     login: (obj, args) => User.login(args)
   },
   User: {
-    tasks: resolver(User.Tasks)
+    tasks: createConnectionResolver({
+      target: User.Tasks
+    }).resolveConnection
   }
 };

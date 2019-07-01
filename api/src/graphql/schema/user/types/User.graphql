@@ -1,7 +1,7 @@
 """
 User: represents a user
 """
-type User {
+type User implements Node {
   """
   User id
   """
@@ -15,7 +15,13 @@ type User {
   """
   password: String
   """
-  the user tasks
+  The user tasks
   """
-  tasks: [Task]
+  tasks(
+    first: Int=10,
+    after: String,
+    last: Int,
+    before: String
+  ): UserTasksConnection
 }
+

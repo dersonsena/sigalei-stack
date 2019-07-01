@@ -1,0 +1,5 @@
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]
+  totalCount: Int!
+}

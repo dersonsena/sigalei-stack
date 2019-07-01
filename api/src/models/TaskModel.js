@@ -1,36 +1,27 @@
-import Sequelize, { Model } from 'sequelize';
-
-class Task extends Model {
-  static associate(models) {
-    Task.User = Task.belongsTo(models.User, {
+/* eslint max-lines-per-function: 0 */
+export default (sequelize, DataTypes) => {
+  const Task = sequelize.define('Task', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
+    },
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    completed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
+  });
+  Task.associate = ({ User }) => {
+    Task.User = Task.belongsTo(User, {
       as: 'user',
       foreignKey: 'UserId',
       onDelete: 'CASCADE'
     });
-  }
-}
-
-export default sequelize => {
-  Task.init(
-    {
-      id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true
-      },
-      content: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      completed: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      }
-    },
-    {
-      sequelize
-    }
-  );
+  };
 
   return Task;
 };

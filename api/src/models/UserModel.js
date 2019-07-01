@@ -1,7 +1,6 @@
 /* eslint max-lines-per-function: 0 */
-
-const jwt = module.require('jsonwebtoken');
-const bcrypt = module.require('bcrypt');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const errors = {
   INVALID_EMAIL_OR_PASSWORD: 'Invalid email or password',

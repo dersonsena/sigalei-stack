@@ -1,5 +1,4 @@
-const Sequelize = module.require('sequelize');
-const { Model } = module.require('sequelize');
+import Sequelize, { Model } from 'sequelize';
 
 class Task extends Model {
   static associate(models) {
@@ -11,7 +10,7 @@ class Task extends Model {
   }
 }
 
-module.exports = sequelize => {
+export default sequelize => {
   Task.init(
     {
       id: {

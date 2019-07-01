@@ -1,5 +1,5 @@
 const { resolver } = module.require('graphql-sequelize');
-const { User } = module.require('../../models');
+const { User } = module.require('../../../models');
 
 module.exports = {
   Mutation: {

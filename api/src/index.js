@@ -4,14 +4,14 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { GraphQLServer } from 'graphql-yoga';
 import middleware from './graphql/middleware/auth';
-import schemaBuilder from './graphql/schemaBuilder';
 import { sequelize } from './models';
+import buildSchema from './graphql/schemaBuilder';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env')
 });
 
-const schema = schemaBuilder.buildAll();
+const schema = buildSchema();
 schema.context = req => {
   const dataloaderContext = createContext(sequelize);
 

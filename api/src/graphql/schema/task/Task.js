@@ -1,5 +1,5 @@
 import { resolver } from 'graphql-sequelize';
-import { Task } from '../../models';
+import { Task } from '../../../models';
 
 export default {
   Mutation: {

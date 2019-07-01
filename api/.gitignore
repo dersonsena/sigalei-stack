@@ -67,3 +67,6 @@ tmp/
 .vscode/
 
 dist/
+
+# misc
+.DS_Store

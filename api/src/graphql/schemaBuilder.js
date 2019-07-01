@@ -1,27 +1,72 @@
-const path = require('path');
-const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schemas');
+const path = module.require('path');
+const { writeFileSync, copyFile } = module.require('fs');
+const { fileLoader, mergeTypes, mergeResolvers } = module.require(
+  'merge-graphql-schemas'
+);
 
-class SchemaBuilder {
-  constructor() {
-    this.typePath = path.join(__dirname, './**/types/*.graphql');
-    // this.enumPath = path.join(__dirname, './enums');
-    this.resolverPath = path.join(__dirname, './**/*.js');
-    this.queryPath = path.join(__dirname, './**/query/*.graphql');
-    this.mutationPath = path.join(__dirname, './**/mutation/*.graphql');
-    this.types = fileLoader(this.typePath);
-    // this.enums = fileLoader(this.enumPath);
-    this.queries = fileLoader(this.queryPath);
-    this.mutation = fileLoader(this.mutationPath);
-    this.resolvers = fileLoader(this.resolverPath);
-  }
-  buildAll() {
-    this.typeDefs = mergeTypes([...this.types, ...this.queries, ...this.mutation], { all: true });
-    this.resolvers = mergeResolvers(this.resolvers);
-    return {
-      typeDefs: this.typeDefs,
-      resolvers: this.resolvers,
-    };
-  }
-}
+const getPaths = () => {
+  return {
+    typePath: path.join(__dirname, './schema/**/types/*.graphql'),
+    // enumPath: path.join(__dirname, './schema/enums/types'),
+    resolverPath: path.join(__dirname, './schema/**/', '*.js'),
+    queryPath: path.join(__dirname, './schema/**/query/*.graphql'),
+    mutationPath: path.join(__dirname, './schema/**/mutation/*.graphql')
+  };
+};
 
-module.exports = new SchemaBuilder();
+const loadFiles = paths => {
+  const pathFiles = {};
+  Object.keys(paths).forEach(key => {
+    pathFiles[key] = fileLoader(paths[key]);
+  });
+
+  return pathFiles;
+};
+
+const build = paths => {
+  const typeDefs = mergeTypes(
+    [
+      ...paths.typePath,
+      // ...paths.enumPath,
+      ...paths.queryPath,
+      ...paths.mutationPath
+    ],
+    {
+      all: true
+    }
+  );
+
+  const resolvers = mergeResolvers(paths.resolverPath);
+  return { typeDefs, resolvers };
+};
+
+const updateSchemaFile = typeDefs => {
+  writeFileSync(path.join(__dirname, './generated/schema.graphql'), typeDefs);
+};
+
+const copySchemaToWebApp = () => {
+  copyFile(
+    path.join(__dirname, './generated/schema.graphql'),
+    path.join(__dirname, process.env.REACT_SCHEMA_PATH),
+    err => {
+      if (err) {
+        throw err;
+      }
+    }
+  );
+};
+
+const buildSchema = () => {
+  let paths = getPaths();
+  paths = loadFiles(paths);
+  const schema = build(paths);
+
+  if (process.env.ENVIRONMENT === 'development') {
+    updateSchemaFile(schema.typeDefs);
+    copySchemaToWebApp(schema.typeDefs);
+  }
+
+  return schema;
+};
+
+module.exports = buildSchema;

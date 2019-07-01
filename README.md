@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/00c589e23b83a5079af0/maintainability)](https://codeclimate.com/github/sigalei/sigalei-stack/maintainability)
+
 ## Sigalei playground
 We use this repository to test new thing that can be used in our main project in the future.
 

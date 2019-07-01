@@ -1,4 +1,4 @@
-const { User, Task } = module.require('../../models');
+const { User, Task } = module.require('../../../models');
 
 module.exports = {
   Mutation: {

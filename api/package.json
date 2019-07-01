@@ -54,7 +54,7 @@
     "@babel/runtime": "^7.4.5",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.2",
-    "dataloader-sequelize": "^2.0.1",
+    "dataloader-sequelize": "^1.7.2",
     "dotenv": "^6.0.0",
     "graphql": "^14.0.2",
     "graphql-relay": "^0.6.0",

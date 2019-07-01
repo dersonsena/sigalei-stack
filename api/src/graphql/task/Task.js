@@ -6,10 +6,10 @@ export default {
     createTask: async (obj, args, { auth: { user } }) => user.createTask(args)
   },
   Query: {
-    task: (...args) => resolver(Task)(...args),
-    tasks: (...args) => resolver(Task)(...args)
+    task: resolver(Task),
+    tasks: resolver(Task)
   },
   Task: {
-    user: (...args) => resolver(Task.User)(...args)
+    user: resolver(Task.User)
   }
 };

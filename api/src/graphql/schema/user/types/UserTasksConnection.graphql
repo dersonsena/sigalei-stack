@@ -1,0 +1,5 @@
+type UserTasksConnection {
+  pageInfo: PageInfo!
+  edges: [UserTasksEdge]
+  totalCount: Int!
+}

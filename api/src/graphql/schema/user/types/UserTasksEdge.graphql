@@ -1,0 +1,4 @@
+type UserTasksEdge {
+  cursor: String!
+  node: Task
+}

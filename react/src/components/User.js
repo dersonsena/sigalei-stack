@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import graphql from "babel-plugin-relay/macro";
 
 import { createFragmentContainer } from "react-relay";
-import commitMutation from "./commitMutation";
+import commitMutation from "../utils/commitMutation";
 import Task from "./Task";
 
 const taskMutation = graphql`
@@ -88,6 +89,18 @@ class User extends React.Component {
     );
   }
 }
+
+User.propTypes = {
+  user: PropTypes.object,
+  refetch: PropTypes.func,
+  withRefetch: PropTypes.bool
+};
+
+User.defaultProps = {
+  user: {},
+  refetch: null,
+  withRefetch: false
+};
 
 export default createFragmentContainer(User, {
   user: graphql`

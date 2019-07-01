@@ -2,9 +2,9 @@ require('dotenv').config();
 const { GraphQLServer } = require('graphql-yoga');
 const middleware = require('./graphql/middleware/auth');
 
-const schemaBuilder = module.require('./graphql/schemaBuilder');
+const buildSchema = module.require('./graphql/schemaBuilder');
 
-const schema = schemaBuilder.buildAll();
+const schema = buildSchema();
 schema.context = req => ({ ...req });
 schema.middlewares = middleware;
 const server = new GraphQLServer(schema);

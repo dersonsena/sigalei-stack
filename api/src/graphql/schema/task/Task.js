@@ -1,4 +1,4 @@
-const { Task, User } = module.require('../../models');
+const { Task, User } = module.require('../../../models');
 
 module.exports = {
   Query: {

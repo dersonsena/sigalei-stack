@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import graphql from "babel-plugin-relay/macro";
 
 import { createRefetchContainer } from "react-relay";
 
-import createQueryRenderer from "./CreateQueryRender";
+import createQueryRenderer from "../utils/CreateQueryRender";
 import User from "./User";
 
 class UserList extends React.Component {
@@ -16,6 +17,7 @@ class UserList extends React.Component {
   }
 
   toggleChecked = () => this.setState({ checked: !this.state.checked });
+  
   render() {
     const {
       data: { users },
@@ -46,6 +48,16 @@ class UserList extends React.Component {
     );
   }
 }
+
+UserList.propTypes = {
+  data: PropTypes.object,
+  relay: PropTypes.object
+};
+
+UserList.defaultProps = {
+  data: {},
+  relay: {}
+};
 
 const query = graphql`
   query UserListQuery {

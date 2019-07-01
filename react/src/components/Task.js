@@ -1,18 +1,13 @@
 import React from "react";
-
 import graphql from "babel-plugin-relay/macro";
-
 import { createFragmentContainer } from "react-relay";
+import PropTypes from 'prop-types';
 
-class Task extends React.Component {
-  render() {
-    const {
-      task: { content }
-    } = this.props;
+const Task = ({ task: { content } }) => (<li>{content}</li>);
 
-    return <li>{content}</li>;
-  }
-}
+Task.propTypes = {
+  task: PropTypes.object.isRequired
+};
 
 export default createFragmentContainer(Task, {
   task: graphql`

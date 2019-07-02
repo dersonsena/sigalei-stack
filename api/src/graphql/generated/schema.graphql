@@ -167,7 +167,7 @@ type UserEdge {
   node: User
 }
 
-type UserTasksConnection {
+type UserTasksConnection implements Connection {
   pageInfo: PageInfo!
   edges: [UserTasksEdge]
   totalCount: Int!

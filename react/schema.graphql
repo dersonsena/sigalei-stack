@@ -10,6 +10,11 @@ type Query {
   Get a task
   """
   task(id: String!): Task
+  # Get all tasks
+  """
+  Get all tasks
+  """
+  tasks: [Task]
   # Get a user
   """
   Get a user
@@ -19,7 +24,7 @@ type Query {
   """
   Get a user
   """
-  users: [User]
+  users(first: Int = 10, after: String, last: Int, before: String): UserConnection
   # Get user credentials
   """
   Get user credentials
@@ -29,23 +34,64 @@ type Query {
 
 "Task mutations"
 type Mutation {
+  # Create a task
+  """
+  Create a task
+  """
+  createTask(content: String!): Task
   # Sign up a new user
   """
   Sign up a new user
   """
   signUp(email: String!, password: String!): User
-  # Create a task
+}
+
+interface Connection {
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+"""
+Node: represents a node interface
+"""
+interface Node {
+  # The ID of the object
   """
-  Create a task
+  The ID of the object
   """
-  createTask(content: String!, userId: String!): Task
-  # Sign up a new user
+  id: ID!
+}
+
+"""
+PageInfo: represents informations form a page
+"""
+type PageInfo {
+  # When paginating forwards, the cursor to continue
+  """
+  When paginating forwards, the cursor to continue
+  """
+  endCursor: String
+  # When paginating forwards, are there more items?
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+  # When paginating backwards, are there more items?
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+  # When paginating backwards, the cursor to continue
+  """
+  When paginating backwards, the cursor to continue
+  """
+  startCursor: String
 }
 
 """
 Task: represents a task
 """
-type Task {
+type Task implements Node {
   # Task id
   """
   Task id
@@ -61,6 +107,11 @@ type Task {
   The completed status of a task
   """
   completed: Boolean
+  # The use of the task
+  """
+  The use of the task
+  """
+  user: User
 }
 
 """
@@ -82,7 +133,7 @@ type AuthToken {
 """
 User: represents a user
 """
-type User {
+type User implements Node {
   # User id
   """
   User id
@@ -98,9 +149,31 @@ type User {
   User password
   """
   password: String
-  # the user tasks
+  # The user tasks
   """
-  the user tasks
+  The user tasks
   """
-  Tasks: [Task]
+  tasks(first: Int = 10, after: String, last: Int, before: String): UserTasksConnection
+}
+
+type UserConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]
+  totalCount: Int!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User
+}
+
+type UserTasksConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [UserTasksEdge]
+  totalCount: Int!
+}
+
+type UserTasksEdge {
+  cursor: String!
+  node: Task
 }

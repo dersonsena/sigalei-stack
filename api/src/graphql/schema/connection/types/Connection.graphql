@@ -1,0 +1,4 @@
+interface Connection {
+  pageInfo: PageInfo!
+  totalCount: Int!
+}

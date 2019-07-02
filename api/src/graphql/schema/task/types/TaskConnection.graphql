@@ -1,0 +1,5 @@
+type TaskConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [TaskEdge]
+  totalCount: Int!
+}

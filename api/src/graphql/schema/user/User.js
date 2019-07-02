@@ -1,7 +1,5 @@
-const { resolver, createConnectionResolver } = module.require(
-  'graphql-sequelize'
-);
-const { User } = module.require('../../../models');
+import { User } from '../../../models';
+import { resolver, connectionResolver } from '../../../utils';
 
 module.exports = {
   Mutation: {
@@ -9,12 +7,10 @@ module.exports = {
   },
   Query: {
     user: resolver(User),
-    users: createConnectionResolver({ target: User }).resolveConnection,
+    users: connectionResolver(User),
     login: (obj, args) => User.login(args)
   },
   User: {
-    tasks: createConnectionResolver({
-      target: User.Tasks
-    }).resolveConnection
+    tasks: connectionResolver(User.Tasks)
   }
 };

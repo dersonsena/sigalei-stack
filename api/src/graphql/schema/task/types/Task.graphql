@@ -15,7 +15,7 @@ type Task implements Node {
   """
   completed: Boolean
   """
-  The use of the task
+  The user of the task
   """
   user: User
 }

@@ -1,5 +1,5 @@
 import { Task } from '../../../models';
-import resolver from '../../../utils/resolver';
+import { resolver, connectionResolver } from '../../../utils';
 
 export default {
   Mutation: {
@@ -7,7 +7,7 @@ export default {
   },
   Query: {
     task: resolver(Task),
-    tasks: resolver(Task)
+    tasks: connectionResolver(Task)
   },
   Task: {
     user: resolver(Task.User)

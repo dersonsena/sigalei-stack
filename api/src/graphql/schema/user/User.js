@@ -1,5 +1,5 @@
 import { User } from '../../../models';
-import resolver from '../../../utils/resolver';
+import { resolver, connectionResolver } from '../../../utils';
 
 module.exports = {
   Mutation: {
@@ -7,10 +7,10 @@ module.exports = {
   },
   Query: {
     user: resolver(User),
-    users: resolver(User),
+    users: connectionResolver(User),
     login: (obj, args) => User.login(args)
   },
   User: {
-    tasks: resolver(User.Tasks)
+    tasks: connectionResolver(User.Tasks)
   }
 };

@@ -7,5 +7,10 @@ type Query {
   """
   Get all tasks
   """
-  tasks: [Task]
+  tasks(
+    first: Int=10,
+    after: String,
+    last: Int,
+    before: String
+  ): TaskConnection
 }

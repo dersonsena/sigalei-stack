@@ -14,7 +14,7 @@ type Query {
   """
   Get all tasks
   """
-  tasks: [Task]
+  tasks(first: Int = 10, after: String, last: Int, before: String): TaskConnection
   # Get a user
   """
   Get a user
@@ -107,11 +107,22 @@ type Task implements Node {
   The completed status of a task
   """
   completed: Boolean
-  # The use of the task
+  # The user of the task
   """
-  The use of the task
+  The user of the task
   """
   user: User
+}
+
+type TaskConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [TaskEdge]
+  totalCount: Int!
+}
+
+type TaskEdge {
+  cursor: String!
+  node: Task
 }
 
 """

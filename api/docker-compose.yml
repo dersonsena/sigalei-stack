@@ -1,17 +1,21 @@
 version: '3'
 services:
   app:
-    image: node:10-alpine
     container_name: sigalei-stack-app
-    user: "node"
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=${NODE_ENV}
+    image: sigalei/stack-app
+    build:
+      context: ./.docker
+      dockerfile: node.dockerfile
     volumes:
       - ./:/home/node/app
     ports:
-      - ${NODE_PORT}:8081
-    command: "sh /home/node/app/scripts/startup.sh"
+      - ${DOCKER_NODE_PORT}:5000
+    depends_on:
+      - postgresql
+    networks: 
+      - sigalei-stack-network
+    environment:
+      - NODE_ENV=${DOCKER_NODE_ENV}
 
   postgresql:
     image: postgres:9.6
@@ -20,7 +24,7 @@ services:
     volumes:
       - ./.docker/data/postgresql:/var/lib/postgresql/data
     ports:
-      - ${PG_PORT}:5432
+      - ${DOCKER_PG_PORT}:5432
     environment:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: ${PG_DATABASE}
@@ -31,11 +35,13 @@ services:
     image: thajeztah/pgadmin4
     container_name: sigalei-stack-pgadmin
     ports:
-     - ${PGADMIN_PORT}:5050
+     - ${DOCKER_PGADMIN_PORT}:5050
     volumes:
      - ./.docker/data/pgadmin:/pgadmin:rw
     networks:
       - sigalei-stack-network
+    depends_on:
+      - postgresql
 
 networks: 
   sigalei-stack-network:

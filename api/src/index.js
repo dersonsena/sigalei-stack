@@ -26,14 +26,14 @@ schema.context = req => {
 schema.middlewares = middleware;
 const server = new GraphQLServer(schema);
 const options = {
-  port: process.env.GL_SERVER_PORT || 5000,
+  port: 5000,
   endpoint: process.env.GL_SERVER_ENDPOINT || '/graphql',
   playground: '/test'
 };
 
 server.start(options, () => {
   console.log(
-    `Server listening on port ${options.port} at endpoint ${options.endpoint}`
+    `Server listening on port ${process.env.DOCKER_APP_PORT} at endpoint ${options.endpoint}`
   );
   if (options.playground) {
     console.log(`Playground is active at endpoint ${options.playground}`);

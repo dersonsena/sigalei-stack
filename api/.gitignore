@@ -70,3 +70,5 @@ dist/
 
 # misc
 .DS_Store
+
+.docker/data/*

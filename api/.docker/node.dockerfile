@@ -1,5 +1,5 @@
 FROM node:10.16.0-alpine
-MAINTAINER Kilderson Sena
+MAINTAINER Sigalei
 
 RUN apk add --update \
     python \

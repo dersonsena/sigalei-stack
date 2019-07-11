@@ -26,7 +26,7 @@ schema.context = req => {
 schema.middlewares = middleware;
 const server = new GraphQLServer(schema);
 const options = {
-  port: 5000,
+  port: process.env.GL_SERVER_PORT || 5000,
   endpoint: process.env.GL_SERVER_ENDPOINT || '/graphql',
   playground: '/test'
 };

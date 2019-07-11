@@ -44,6 +44,19 @@ services:
     depends_on:
       - postgresql
 
+  adminer:
+    image: adminer
+    container_name: sigalei-stack-adminer
+    restart: always
+    ports:
+     - ${DOCKER_ADMINER_PORT}:8080
+    networks:
+      - sigalei-stack-network
+    environment:
+      - ADMINER_DESIGN=${DOCKER_ADMINER_DESIGN}
+    depends_on:
+      - postgresql
+
 networks: 
   sigalei-stack-network:
     driver: bridge

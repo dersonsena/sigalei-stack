@@ -6,6 +6,7 @@ import { GraphQLServer } from 'graphql-yoga';
 import middleware from './graphql/middleware/auth';
 import { sequelize } from './models';
 import buildSchema from './graphql/schemaBuilder';
+import config from '../config';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env')
@@ -26,14 +27,14 @@ schema.context = req => {
 schema.middlewares = middleware;
 const server = new GraphQLServer(schema);
 const options = {
-  port: 5000,
-  endpoint: process.env.GL_SERVER_ENDPOINT || '/graphql',
+  port: config.GL_SERVER_PORT || 5000,
+  endpoint: config.GL_SERVER_ENDPOINT || '/graphql',
   playground: '/test'
 };
 
 server.start(options, () => {
   console.log(
-    `Server listening on port ${process.env.DOCKER_APP_PORT} at endpoint ${options.endpoint}`
+    `Server listening on port ${config.DOCKER_APP_PORT} at endpoint ${options.endpoint}`
   );
   if (options.playground) {
     console.log(`Playground is active at endpoint ${options.playground}`);

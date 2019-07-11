@@ -1,3 +1,4 @@
+const config = module.require('../../config');
 const jwt = module.require('jsonwebtoken');
 const { User } = module.require('../../models');
 
@@ -17,7 +18,7 @@ const authenticate = async (resolve, token, ctx) => {
   let jwtDecoded;
 
   try {
-    jwtDecoded = jwt.verify(token, process.env.API_SECRET);
+    jwtDecoded = jwt.verify(token, config.API_SECRET);
   } catch (err) {
     throw new Error(messages.INVALID_CREDS);
   }

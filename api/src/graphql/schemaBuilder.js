@@ -1,4 +1,5 @@
 const path = module.require('path');
+const config = require('../../config');
 const { writeFileSync, copyFile } = module.require('fs');
 const { fileLoader, mergeTypes, mergeResolvers } = module.require(
   'merge-graphql-schemas'
@@ -47,7 +48,7 @@ const updateSchemaFile = typeDefs => {
 const copySchemaToWebApp = () => {
   copyFile(
     path.join(__dirname, './generated/schema.graphql'),
-    path.join(__dirname, process.env.REACT_SCHEMA_PATH),
+    path.join(__dirname, config.REACT_SCHEMA_PATH),
     err => {
       if (err) {
         throw err;

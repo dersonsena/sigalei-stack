@@ -17,11 +17,12 @@ class App extends React.Component {
 
   render() {
     const { token } = this.state;
+
     if (!token) {
       return <Login onLogin={this.onLogin} />;
-    } else {
-      return <UserList />;
     }
+
+    return <UserList />;
   }
 }
 

@@ -6,7 +6,7 @@
 
 ## DOCKER SETUP
 
-You need of the Docker and Docker Compose instaled and configured in your computer. For more details of the how to install and configure docker, please, follow the oficial documentation: [https://docs.docker.com/install](https://docs.docker.com/install)
+You need Docker and Docker Compose installed and configured in your computer. For more details about how to install and configure docker, please, follow the oficial documentation: [https://docs.docker.com/install](https://docs.docker.com/install)
 
 Follow the below steps do startup all needed services of the application.
 
